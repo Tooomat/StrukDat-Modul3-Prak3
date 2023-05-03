@@ -6,32 +6,40 @@
 
 class Stack:
     def __init__(self):
-        self.Stack = []
+        self.stack = []
         self.top = -1
 
-    def isEmpty(self):
-        return self.Stack == [] 
-        
-    #menambah data
+    def is_empty(self):
+        return self.top == -1
+
+    def pop(self):
+        if not self.is_empty():
+            item = self.stack[self.top]
+            self.top -= 1
+            return item
+        else:
+            return None
+
+    def peek(self):
+        if not self.is_empty():
+            return self.stack[self.top]
+        else:
+            return None
+
     def push(self, newItem):
-        while newItem != None:
-            #cara 1: manual
-            reverse_i = len(newItem) - 1 - i
-            self.Stack = newItem[reverse_i]
-            return self.Stack
-        
-            #cara 2: menggunakan append
-            #reverse_i = len(newItem) - 1 - i
-            #self.Stack.append(newItem[reverse_i])
-            #return self.Stack[i]
+        self.top += 1
+        self.stack.append(newItem)
 
-    #cara 3: menggunakan [::-1]
-    #def push2(self, newItem):
-        #self.Stack = newItem[::-1]#startIndex endIndex step
-        #return self.Stack
+def Reverse(input):
+    stack = Stack()
+    for i in input:
+        stack.push(i)
 
-stack = Stack()
+    reverse = ''
+    while not stack.is_empty():
+        reverse += stack.pop()
+
+    return reverse
+
 kata = input("Masukkan input: ")
-print('Reversed: ')
-for i in range(len(kata)):
-    print(f'{stack.push(kata)}', end = '')
+print(f'Reverse: {Reverse(kata)}')
